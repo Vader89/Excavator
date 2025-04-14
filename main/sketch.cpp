@@ -300,6 +300,10 @@ void setup() {
     // This service allows clients, like a mobile app, to setup and see the state of Bluepad32.
     // By default, it is disabled.
     BP32.enableBLEService(false);
+
+
+    pinMode(GPIO_NUM_3, OUTPUT);
+
 }
 
 // Arduino loop function. Runs in CPU 1.
@@ -318,4 +322,17 @@ void loop() {
 
     //     vTaskDelay(1);
     delay(150);
+
+    for (auto ctl : myControllers) {
+        if (ctl && ctl->isConnected()) {
+            if (ctl->axisX() > 50) {
+                digitalWrite(GPIO_NUM_3, HIGH);
+            } else if (ctl->axisX() < 0) {
+                digitalWrite(GPIO_NUM_3, LOW);
+            } else {
+                /* code */
+            }
+        }
+    }
+    
 }
