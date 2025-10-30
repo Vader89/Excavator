@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2025-10-30
+### Changed
+- Updated to ESP-IDF v5.4.2 (via README documentation)
+- Migrated Arduino component from git submodule to IDF Component Manager
+  - Now managed via `main/idf_component.yml`
+  - Using `espressif/arduino-esp32` v3.3.2 as managed component
+- Updated all CMakeLists.txt to reference `espressif__arduino-esp32` instead of `arduino`
+
+### Added
+- Extended `.gitignore` with:
+  - `managed_components/` directory
+  - `dependencies.lock` file
+  - `.pio/` directory (PlatformIO build artifacts)
+- Added `#include <driver/gpio.h>` to `cmd_system.c` for proper GPIO API access
+
+### Removed
+- Removed obsolete ESP-IDF 4.4 components:
+  - `components/cmd_nvs_4.4/`
+  - `components/cmd_system_4.4/`
+- Removed `.gitmodules` file (no longer needed with managed components)
+- Removed empty `components/arduino/` directory
+
+### Fixed
+- Fixed `gpio_wakeup_enable` implicit declaration error in `cmd_system.c`
+- Resolved duplicate symbol warnings from dual Arduino integration
+
 ## [4.2.1] - 2025-04-09
 - Arduino Core v3.2
   - Requires ESP-IDF 5.4
