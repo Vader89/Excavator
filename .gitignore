@@ -2,8 +2,15 @@
 sdkconfig.old
 sdkconfig
 
-# misc
+# PlatformIO
+.pio/
 .pioenvs
+
+# IDF Component Manager
+managed_components/
+dependencies.lock
+
+# misc
 .clang_complete
 .gcc-flags.json
 
